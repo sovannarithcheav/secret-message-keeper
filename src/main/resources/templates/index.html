@@ -1,0 +1,127 @@
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="icon" href="https://i.imgur.com/IarwFXz.png">
+    <link href="webjars/bootstrap/4.2.1/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .imagePreview {
+            width: 100%;
+            height: 180px;
+            background-position: center center;
+            background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+            background-color: #fff;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: inline-block;
+            box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            display: block;
+            border-radius: 0px;
+            box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+            margin-top: -5px;
+        }
+
+        .imgUp {
+            margin-bottom: 15px;
+        }
+
+        .del {
+            position: absolute;
+            top: 0px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+
+        .imgAdd {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #4bd7ef;
+            color: #fff;
+            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            line-height: 30px;
+            margin-top: 30px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form name="shortenForm">
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-5 imgUp">
+                <label for="message-input">Write your secret message:</label>
+                <input type="text" class="form-control" placeholder="Write message" id="message-input">
+            </div><!-- col-2 -->
+            <div class="col-md-1">
+                <i class="fa fa-upload imgAdd" style="margin-top: 40px;" aria-hidden="true" onclick="doUpload()"></i>
+            </div>
+            <div class="col-md-5 imgUp">
+                <label for="copy-input">Get your link message here:</label>
+                <input type="text" class="form-control" placeholder="Image Url"
+                       id="copy-input">
+                <hr>
+                <div class="text-center" id="spinner" style="display: none">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 imgUp">
+                <i class="fa fa-copy imgAdd" id="copy-button" aria-hidden="true" onclick="doCopy()"
+                   data-toggle="tooltip" data-placement="button" title="Copy to Clipboard"></i>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="webjars/popper.js/1.14.3/umd/popper.js"></script>
+<script type="text/javascript">
+
+    function doCopy() {
+        var copyText = document.getElementById("copy-input");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    }
+
+    function doUpload() {
+        $.ajax({
+            url: '/upload?message=' + $('#message-input').val(), // point to server-side controller method
+            dataType: 'text', // what to expect back from the server
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'post',
+            success: function (response) {
+                var url = window.location.origin;
+                $('#copy-input').val(url + '/upload?ts=' + response); // display success response from the server
+            }, beforeSend: function () {
+                $('#spinner').show()
+            },
+            complete: function () {
+                $('#spinner').hide();
+            }
+        });
+    }
+</script>
+</body>
+</html>
