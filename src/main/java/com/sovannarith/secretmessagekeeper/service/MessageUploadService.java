@@ -61,7 +61,7 @@ public class MessageUploadService {
         params.add(new BasicNameValuePair("icon_url", "https://i.imgur.com/IarwFXz.png"));
         post.setEntity(new UrlEncodedFormEntity(params));
 
-        Header header = new BasicHeader("Authorization", "Bearer" +TOKEN);
+        Header header = new BasicHeader("Authorization", "Bearer xoxp" +TOKEN);
         post.setHeader(header);
 
         HttpClient client = HttpClients.createDefault();
