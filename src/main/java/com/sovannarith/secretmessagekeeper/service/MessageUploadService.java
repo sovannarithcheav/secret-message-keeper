@@ -27,7 +27,7 @@ import static org.apache.http.entity.mime.MIME.UTF8_CHARSET;
 @Service
 public class MessageUploadService {
     private static String CHANNEL_ID = "CQSU5UQ5A";
-    private static String TOKEN = "Bearer xoxp-683056309702-680913572720-848870719028-5df2100850e60f02ddbbf96f9106563d";
+    private static String TOKEN = " xoxp-683056309702-680913572720-836547130418-e767f83a86468e4a1660c46a3e3c23d4";
 
     public String retrieve(String ts) throws IOException, URISyntaxException {
         ts = Utils.toCharInt(ts);
@@ -38,7 +38,7 @@ public class MessageUploadService {
                 .addParameter("channel", CHANNEL_ID)
                 .addParameter("latest", ts)
                 .addParameter("pretty", "1");
-        Header header = new BasicHeader("Authorization", TOKEN);
+        Header header = new BasicHeader("Authorization", "Bearer"+TOKEN);
         HttpGet get = new HttpGet(builder.build());
         get.setHeader(header);
         HttpClient client = new DefaultHttpClient();
@@ -61,7 +61,7 @@ public class MessageUploadService {
         params.add(new BasicNameValuePair("icon_url", "https://i.imgur.com/IarwFXz.png"));
         post.setEntity(new UrlEncodedFormEntity(params));
 
-        Header header = new BasicHeader("Authorization", TOKEN);
+        Header header = new BasicHeader("Authorization", "Bearer" +TOKEN);
         post.setHeader(header);
 
         HttpClient client = HttpClients.createDefault();
