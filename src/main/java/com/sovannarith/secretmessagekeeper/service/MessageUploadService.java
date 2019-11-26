@@ -27,7 +27,7 @@ import static org.apache.http.entity.mime.MIME.UTF8_CHARSET;
 @Service
 public class MessageUploadService {
     private static String CHANNEL_ID = "CQSU5UQ5A";
-    private static String TOKEN = " xoxp-683056309702-680913572720-836547130418-e767f83a86468e4a1660c46a3e3c23d4";
+    private static String TOKEN = "-683056309702-680913572720-849332135280-d69d0c3833939dda8c25cd2efc1ffba0";
 
     public String retrieve(String ts) throws IOException, URISyntaxException {
         ts = Utils.toCharInt(ts);
@@ -38,7 +38,7 @@ public class MessageUploadService {
                 .addParameter("channel", CHANNEL_ID)
                 .addParameter("latest", ts)
                 .addParameter("pretty", "1");
-        Header header = new BasicHeader("Authorization", "Bearer"+TOKEN);
+        Header header = new BasicHeader("Authorization", "Bearer xoxp"+TOKEN);
         HttpGet get = new HttpGet(builder.build());
         get.setHeader(header);
         HttpClient client = new DefaultHttpClient();
