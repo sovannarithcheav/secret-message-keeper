@@ -27,7 +27,7 @@ import static org.apache.http.entity.mime.MIME.UTF8_CHARSET;
 @Service
 public class MessageUploadService {
     private static String CHANNEL_ID = "CQSU5UQ5A";
-    private static String TOKEN = "Bearer xoxp-683056309702-680913572720-843463862245-0b299f19e8aa46583aaf48e9038b8949";
+    private static String TOKEN = "Bearer xoxp-683056309702-680913572720-851518522966-2599da0261dae03a83a34eae4762600b";
 
     public String retrieve(String ts) throws IOException, URISyntaxException {
         ts = Utils.toCharInt(ts);
